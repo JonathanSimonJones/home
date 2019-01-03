@@ -18,7 +18,24 @@ app.intent('favorite color', (conv, {color}) => {
 });
 
 app.intent('run demo', (conv, params) => {
-    conv.close('Hi ' + params['given-name'] +'! This is the demo JJ asked me to run!');
+    var response = "Hi ";
+    
+    if( (typeof params['given-name'] !== 'undefined')
+    && (params['given-name'] !== "") )
+    {
+        response += params['given-name'];
+    }
+    
+    response += ". This is just a demonstration that I can respond to a users request. ";
+    
+    if( (typeof params['number'] !== 'undefined')
+    && (params['number'] !== "") )
+    {
+        response += "The number of routine you would like to run was specified as ";
+        response += params['number'].toString();
+        response += ".";
+    }
+    conv.close(response);
 });
 
 // app.intent('run demo', (conv) => {
